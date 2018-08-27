@@ -1,0 +1,24 @@
+.weui-media-box__title, .weui-media-box__info__meta{
+  text-transform: capitalize;
+}
+
+.weui-media-box__title, .weui-media-box__desc {
+  color: black;
+  line-height: 1.5;
+}
+
+.weui-media-box__info__meta_extra {
+  color: #428bca;
+}
+
+.weui-media-box__info__meta {
+  color: #808080;
+}
+
+.weui-loadmore__tips {
+  color: #808080;
+}
+
+.page__hd {
+  padding: 20px;
+}
