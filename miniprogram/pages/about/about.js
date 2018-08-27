@@ -5,7 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: {},
+    logged: false
+  },
 
+  bindGetUserInfo: function() {
+    if(this.data.logged) return;
+    wx.showLoading({
+      title: '正在登录'
+    });
+    let that = this;
+    wx.getUserInfo({
+      success: function(res) {
+        that.setData({
+          userInfo: res.userInfo,
+          logged: true
+        });
+        wx.hideLoading();
+      }
+    });
+  },
+
+  logout: function() {
+    let that = this;
+    wx.showActionSheet({
+      itemList: ['退出登录'],
+      itemColor: '#F76260',
+      success: function() {
+        that.setData({
+          userInfo: {},
+          logged: false
+        });
+      }
+    });
   },
 
   /**

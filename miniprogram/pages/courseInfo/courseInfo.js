@@ -124,10 +124,12 @@ Page({
     wx.showModal({
       title: '跳转到地图',
       content: '是否查询该教学楼位置',
-      success: function() {
-        wx.navigateTo({
-          url: '../map/map?key=' + escape(key)
-        });
+      success: function(res) {
+        if(res.confirm) {
+          wx.navigateTo({
+            url: '../map/map?key=' + escape(key)
+          });
+        }
       }
     });
   }
