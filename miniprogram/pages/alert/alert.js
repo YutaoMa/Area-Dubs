@@ -1,32 +1,26 @@
-// pages/degreeReq/degreeReq.js
+// pages/alert/alert.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    title: '',
-    loading: true,
-    content: []
+    alerts: [],
+    loading: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let code = unescape(options.code);
-    this.setData({
-      title: unescape(options.title)
-    });
     let that = this;
     wx.cloud.callFunction({
-      name: 'degreeReq',
+      name: 'alert',
       data: {
-        code: code
       },
       success: function(res) {
         that.setData({
-          content: res.result,
+          alerts: res.result,
           loading: false
         });
       },

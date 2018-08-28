@@ -1,0 +1,29 @@
+<view class='page'>
+  <view class='page__hd'>
+  </view>
+
+  <view class='page__bd'>
+     <view class='weui-loadmore' wx:if='{{loading}}'>
+      <view class='weui-loading'></view>
+      <view class='weui-loadmore__tips'>正在加载</view>
+    </view>
+
+    <view class='weui-loadmore weui-loadmore_line' wx:if='{{alerts == null}}'>
+      <text class='weui-loadmore__tips'>暂无数据</text>
+    </view>
+  
+    <view class='weui-article' wx:for='{{alerts}}' wx:key='title'>
+      <view class='weui-article__h1'>{{item.title}}</view>
+      <view class='weui-article__h3'>{{item.dateCreated}}</view>
+      <rich-text nodes='{{item.content}}'></rich-text>
+      <view class='weui-article__h3'>{{item.dateModified + ' ' + 'Last Updated'}}</view>
+      <view class="weui-loadmore weui-loadmore_line"></view>
+    </view>
+  </view>
+
+  <view class='page__ft'>
+    <view class='weui-footer weui-footer_fixed-bottom'>
+      <text class='weui-footer__text'>Copyright © 2018 YtMa</text>
+    </view>
+  </view>
+</view>

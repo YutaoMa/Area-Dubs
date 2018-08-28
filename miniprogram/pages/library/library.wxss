@@ -1,0 +1,19 @@
+.page__hd {
+  padding: 20px;
+}
+
+.weui-media-box__desc {
+  font-size: 16px;
+  color: black;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.weui-media-box__title {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.weui-media-box__info__meta_extra {
+  color: #428bca;
+}

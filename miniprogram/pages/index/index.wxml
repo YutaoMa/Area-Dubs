@@ -40,6 +40,28 @@
             <view class='weui-badge'>NEW</view>
           </view>
         </navigator>
+
+        <navigator url='../library/library' class='weui-media-box weui-media-box_appmsg' hover-class='weui-cell_active'>
+          <view class='weui-media-box__hd weui-media-box__hd_in-appmsg'>
+            <image class='weui-media-box__thumb' src='../../images/library.png' />
+          </view>
+          <view class='weui-media-box__bd weui-media-box__bd_in-appmsg'>
+            <view class='weui-media-box__title'>图书馆</view>
+            <view class='weui-media-box__desc'>获取图书馆 Open Hours</view>
+            <view class='weui-badge'>NEW</view>
+          </view>
+        </navigator>
+
+        <navigator url='../alert/alert' class='weui-media-box weui-media-box_appmsg' hover-class='weui-cell_active'>
+          <view class='weui-media-box__hd weui-media-box__hd_in-appmsg'>
+            <image class='weui-media-box__thumb' src='../../images/alert.png' />
+          </view>
+          <view class='weui-media-box__bd weui-media-box__bd_in-appmsg'>
+            <view class='weui-media-box__title'>UW Alert</view>
+            <view class='weui-media-box__desc'>最新 Campus Alert 通知</view>
+            <view class='weui-badge'>NEW</view>
+          </view>
+        </navigator>
       </view>
     </view>
   </view>

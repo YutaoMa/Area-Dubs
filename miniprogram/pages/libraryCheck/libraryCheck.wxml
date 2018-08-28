@@ -1,0 +1,49 @@
+<view class='page'>
+  <view class='page__hd'>
+    <view class='page__title'>{{title}}</view>
+    <view class='page__desc'>
+      <view class='weui-btn-area'>
+        <picker bindchange='updateDate' mode='date' value='{{date}}' start='{{startDate}}' end='{{endDate}}'>
+          <button type='default'>{{date}}</button>
+        </picker>
+
+        <picker wx:if='{{lid == "1454"}}' bindchange='updateGroup' mode='selector' range='{{odeList}}' value='{{index}}' range-key='name'>
+          <button type='default'>{{odeList[index].name}}</button>
+        </picker>
+
+        <picker wx:if='{{lid == "1452"}}' bindchange='updateGroup' mode='selector' range='{{fosterList}}' value='{{index}}' range-key='name'>
+          <button type='default'>{{fosterList[index].name}}</button>
+        </picker>
+
+        <picker wx:if='{{lid == "1453"}}' bindchange='updateGroup' mode='selector' range='{{healthList}}' value='{{index}}' range-key='name'>
+          <button type='default'>{{healthList[index].name}}</button>
+        </picker>
+
+        <picker wx:if='{{lid == "1449"}}' bindchange='updateGroup' mode='selector' range='{{suzzalloList}}' value='{{index}}' range-key='name'>
+          <button type='default'>{{suzzalloList[index].name}}</button>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class='page__bd'>
+    <view class='weui-loadmore' wx:if='{{loading}}'>
+      <view class='weui-loading'></view>
+      <view class='weui-loadmore__tips'>正在加载</view>
+    </view>
+
+    <view class='weui-loadmore weui-loadmore_line' wx:if='{{times == null}}'>
+      <text class='weui-loadmore__tips'>暂无数据</text>
+    </view>
+
+    <view class='weui-article' wx:if='{{!loading}}'>
+      <rich-text nodes='{{times}}'></rich-text>
+    </view>
+  </view>
+
+  <view class='page__ft'>
+    <view class='weui-footer weui-footer_fixed-bottom'>
+      <text class="weui-footer__text">Copyright © 2018 YtMa</text>
+    </view>
+  </view>
+</view>

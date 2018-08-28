@@ -10,6 +10,7 @@
 	},
 	"appid": "wx1e78ba493fc88875",
 	"projectname": "AreaDubs",
+	"libVersion": "2.2.4",
 	"condition": {
 		"search": {
 			"current": -1,

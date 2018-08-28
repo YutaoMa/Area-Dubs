@@ -1,0 +1,7 @@
+.weui-article__h1 {
+  text-align: center;
+}
+
+.weui-article__h3 {
+  font-style: italic;
+}
