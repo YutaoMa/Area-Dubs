@@ -5,6 +5,7 @@
     "pages/course/course",
     "pages/courseInfo/courseInfo",
     "pages/map/map",
+    "pages/mapRoute/mapRoute",
     "pages/degree/degree",
     "pages/degreeInfo/degreeInfo",
     "pages/degreeReq/degreeReq",

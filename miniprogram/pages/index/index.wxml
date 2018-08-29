@@ -1,7 +1,12 @@
 <view class='page'>
-  <view class='page__hd'>
-    <view class='page__title'>Area Dubs</view>
-    <view class='page__desc'>小程序 for UW</view>
+  <view class='page__hd weui-flex'>
+    <view class='weui-flex__item'>
+      <view class='page__title'>Area Dubs</view>
+      <view class='page__desc'>小程序 for UW</view>
+    </view>
+    <view class='weui-flex__item' style='text-align: center;'>
+      <image src='../../images/areadubs.png' />
+    </view>
   </view>
 
   <view class='page__bd'>

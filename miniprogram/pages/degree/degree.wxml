@@ -19,6 +19,8 @@
   </view>
 
   <view class='page__bd'>
+    <rich-text class='help' wx:if='{{!loading && !focus && results.length == 0}}' nodes='{{help}}'></rich-text>
+
     <view class='weui-loadmore' wx:if='{{loading}}'>
       <view class='weui-loading'></view>
       <view class='weui-loadmore__tips'>正在搜索</view>

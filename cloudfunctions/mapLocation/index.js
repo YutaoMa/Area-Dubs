@@ -17,6 +17,7 @@ function getLocation(id) {
 function formatLocation(r) {
   let res = JSON.parse(r).post;
   let location = {
+    id: res.id,
     title: res.title.replace(/&amp;/g, '&'),
     longitude: res.custom_fields.longitude,
     latitude: res.custom_fields.latitude

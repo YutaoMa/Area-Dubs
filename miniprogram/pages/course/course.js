@@ -9,7 +9,13 @@ Page({
     focus: false,
     value: '',
     loading: false,
-    results: []
+    results: [],
+    help: `
+    <ul>
+      <li>可以通过课号或关键字搜索, 课号中不使用空格, 例如: ENGL111, CSE143</li>
+      <li>点击搜索结果跳转至详情页面, 然后可以通过点击 Schedule 搜索教学楼位置, 点击 Instructor 查询 Ratemyprofessors 评价</li>
+    </ul>
+    `
   },
 
   /**

@@ -1,0 +1,75 @@
+<view class='page'>
+  <view class='page__hd'>
+    <view class='weui-search-bar'>
+      <view class='weui-search-bar__form'>
+        <view class='weui-search-bar__box'>
+          <icon class='weui-icon-search_in-box' type='search' size='14' />
+          <input class='weui-search-bar__input' type='text' placeholder='起始地点' value='{{valueFrom}}' focus='{{focusFrom}}' bindinput='onSearchFrom' />
+          <view class='weui-icon-clear' wx:if='{{valueFrom.length > 0}}' bindtap='clearSearchFrom'>
+            <icon type='clear' size='14' />
+          </view>
+        </view>
+        <label class='weui-search-bar__label' hidden='{{focusFrom}}' bindtap='focusSearchFrom'>
+          <icon class='weui-icon-search' type='search' size='14' />
+          <view class='weui-search-bar__text'>{{placeholderFrom}}</view>
+        </label>
+      </view>
+      <view class='weui-search-bar__cancel-btn' hidden='{{!focusFrom}}' bindtap='cancelSearchFrom'>取消</view>
+    </view>
+
+    <view class='weui-search-bar'>
+      <view class='weui-search-bar__form'>
+        <view class='weui-search-bar__box'>
+          <icon class='weui-icon-search_in-box' type='search' size='14' />
+          <input class='weui-search-bar__input' type='text' placeholder='结束地点' value='{{valueTo}}' focus='{{focusTo}}' bindinput='onSearchTo' />
+          <view class='weui-icon-clear' wx:if='{{valueTo.length > 0}}' bindtap='clearSearchTo'>
+            <icon type='clear' size='14' />
+          </view>
+        </view>
+        <label class='weui-search-bar__label' hidden='{{focusTo}}' bindtap='focusSearchTo'>
+          <icon class='weui-icon-search' type='search' size='14' />
+          <view class='weui-search-bar__text'>{{placeholderTo}}</view>
+        </label>
+      </view>
+      <view class='weui-search-bar__cancel-btn' hidden='{{!focusTo}}' bindtap='cancelSearchTo'>取消</view>
+    </view>
+
+    <button type='default' hidden='{{focusFrom || focusTo || fromId == "" || toId == ""}}' bindtap='searchRoute'>Search Route</button>
+  </view>
+
+  <view class='page__bd'>
+    <view class='weui-loadmore' wx:if='{{loading}}'>
+      <view class='weui-loading'></view>
+      <view class='weui-loadmore__tips'>正在搜索</view>
+    </view>
+
+    <view class='weui-cells' wx:if='{{!loading}}'>
+      <rich-text class='help' wx:if='{{focusFrom && resultsFrom.length == 0}}' nodes='{{help}}'></rich-text>
+      <view class='weui-cell weui-cell_access' hover-class='weui-cell_active' wx:for='{{resultsFrom}}' wx:key='id' data-id='{{item.id}}' bindtap='setFrom'>
+        <view class='weui-cell__bd'>{{item.title}}</view>
+        <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+      </view>
+    </view>
+
+    <view class='weui-cells' wx:if='{{!loading}}'>
+      <rich-text class='help' wx:if='{{focusTo && resultsTo.length == 0}}' nodes='{{help}}'></rich-text>
+      <view class='weui-cell weui-cell_access' hover-class='weui-cell_active' wx:for='{{resultsTo}}' wx:key='id' data-id='{{item.id}}' bindtap='setTo'>
+        <view class='weui-cell__bd'>{{item.title}}</view>
+        <view class='weui-cell__ft weui-cell__ft_in-access'></view>
+      </view>
+    </view>
+
+    <map hidden='{{focusFrom || focusTo}}' longitude='{{longitude}}' latitude='{{latitude}}' markers='{{markers}}' scale='{{scale}}' polyline='{{polyline}}'>
+      <cover-view wx:if='{{routeDistance != "" && routeTime != ""}}'>
+        <cover-view>{{'行程距离: ' + routeDistance}}</cover-view>
+        <cover-view>{{'步行时间: ' + routeTime}}</cover-view>
+      </cover-view>
+    </map>
+  </view>
+
+  <view class='page__ft'>
+    <view class='weui-footer weui-footer_fixed-bottom'>
+      <text class='weui-footer__text'>Copyright © 2018 YtMa</text>
+    </view>
+  </view>
+</view>

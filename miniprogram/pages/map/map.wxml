@@ -11,7 +11,7 @@
         </view>
         <label class='weui-search-bar__label' hidden='{{focus}}' bindtap='focusSearch'>
           <icon class='weui-icon-search' type='search' size='14' />
-          <view class='weui-search-bar__text'>搜索</view>
+          <view class='weui-search-bar__text'>{{placeholder}}</view>
         </label>
       </view>
       <view class='weui-search-bar__cancel-btn' hidden='{{!focus}}' bindtap='cancelSearch'>取消</view>
@@ -25,13 +25,14 @@
     </view>
 
     <view class='weui-cells' wx:if='{{!loading}}'>
+      <rich-text class='help' wx:if='{{focus && results.length == 0}}' nodes='{{help}}'></rich-text>
       <view class='weui-cell weui-cell_access' hover-class='weui-cell_active' wx:for='{{results}}' wx:key='id' data-id='{{item.id}}' bindtap='getLocation'>
         <view class='weui-cell__bd'>{{item.title}}</view>
         <view class='weui-cell__ft weui-cell__ft_in-access'></view>
       </view>
     </view>
 
-    <map hidden='{{focus}}' longitude='{{longitude}}' latitude='{{latitude}}' markers='{{markers}}' scale='{{scale}}'></map>
+    <map hidden='{{focus}}' longitude='{{longitude}}' latitude='{{latitude}}' markers='{{markers}}' scale='{{scale}}' bindcallouttap='mapAction' bindmarkertap='mapAction'></map>
   </view>
 
   <view class='page__ft'>

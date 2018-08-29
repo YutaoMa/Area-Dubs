@@ -13,7 +13,14 @@ Page({
     longitude: '-122.30588',
     latitude: '47.6550375',
     markers: [],
-    scale: '16'
+    scale: '16',
+    help: `
+    <ul>
+      <li>可以通过建筑全程或简写搜索, 例如: ODE, Lander Hall</li>
+      <li>部分关键词可以快速搜索到一类设施, 例如: Parking</li>
+    </ul>
+    `,
+    placeholder: '搜索'
   },
 
   /**
@@ -145,7 +152,9 @@ Page({
       },
       success: function(res) {
         that.setData({
+          placeholder: res.result.title.substring(0, 40),
           markers: [{
+            id: res.result.id,
             latitude: res.result.latitude,
             longitude: res.result.longitude,
             callout: {
@@ -162,6 +171,27 @@ Page({
         that.cancelSearch();
       },
       fail: console.error
+    })
+  },
+
+  mapAction: function(e) {
+    let id = e.markerId;
+    wx.showActionSheet({
+      itemList: ['从这里开始', '前往这里'],
+      success: function(res) {
+        let mode;
+        if(res.tapIndex == 0) {
+          mode = '0';
+        } else {
+          mode = '1';
+        }
+        let url = '../mapRoute/mapRoute';
+        url += '?mode=' + mode;
+        url += '&id=' + id;
+        wx.navigateTo({
+          url
+        });
+      }
     })
   }
 })
