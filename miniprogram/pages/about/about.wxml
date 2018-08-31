@@ -1,11 +1,12 @@
 <view class='page'>
   <view class='page__hd'>
     <view class='page__title'>
-      <image src='{{logged ? userInfo.avatarUrl : "../../images/user.png"}}' />
+      <open-data wx:if='{{logged}}' class='avatar' type="userAvatarUrl"></open-data>
+      <image wx:else class='avatar' src='../../images/user.png' />
     </view>
     <view class='page__desc'>
-      <button class='weui-btn' open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo' wx:if='{{!logged}}'>登录</button>
-      <text wx:else>{{userInfo.nickName}}</text>
+      <open-data wx:if='{{logged}}' type="userNickName"></open-data>
+      <button wx:else class='weui-btn' open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>登录</button>
     </view>
   </view>
 

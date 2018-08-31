@@ -6,10 +6,12 @@
   margin-left: 5px;
 }
 
-.page__title image {
+.avatar {
   width: 100rpx;
   height:100rpx;
   border-radius: 50%;
+  overflow:hidden;
+  display: block;
 }
 
 .weui-cell__hd image {

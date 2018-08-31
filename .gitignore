@@ -2,4 +2,5 @@
 .vscode/
 
 # Node
+node_modules/
 cloudfunctions/*/node_modules/

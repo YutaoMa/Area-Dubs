@@ -1,11 +1,11 @@
-let request = require('request');
-let cheerio = require('cheerio');
+const request = require('request');
+const cheerio = require('cheerio');
 
 function getReq(code) {
-  return new Promise(function(resolve, reject) {
-    let url ='https://myplan.uw.edu/program/api/audits/empty/' + code;
-    request(url, function(err, res, body) {
-      if(err) {
+  return new Promise((resolve, reject) => {
+    const url = `https://myplan.uw.edu/program/api/audits/empty/${code}`;
+    request(url, (err, res, body) => {
+      if (err) {
         reject(err);
       } else {
         resolve(body);
@@ -14,49 +14,49 @@ function getReq(code) {
   });
 }
 
+function strFilter(str) {
+  const reg1 = / +/g;
+  const str1 = str.replace(reg1, ' ');
+  const reg2 = /\t+/g;
+  const str2 = str1.replace(reg2, '');
+  const reg3 = /\n(\s)*\n/g;
+  return str2.replace(reg3, '\n').trim();
+}
+
 function formatReq(r) {
-  let $ = cheerio.load(r);
-  $(".linkified").each(function (i, ele) {
-    let text = $(ele).attr("data-subject") + " " + $(ele).attr("data-number");
+  const $ = cheerio.load(r);
+  $('.linkified').each((i, ele) => {
+    const text = `${$(ele).attr('data-subject')} ${$(ele).attr('data-number')}`;
     $(ele).text(text);
   });
-  $(".status, .earned, .UTEXT, .MATRICTXT, .HUNGRY-EL").each(function (i, ele) {
+  $('.status, .earned, .UTEXT, .MATRICTXT, .HUNGRY-EL').each((i, ele) => {
     $(ele).remove();
   });
-  let response = [];
-  $(".audit-section, .audit-large-section").each(function (i, ele) {
-    let heading = $(ele).find(".audit-section-heading, .audit-large-section-heading").text().filter();
-    let requirements = [];
-    $(ele).find(".audit-requirement").each(function (ii, reqEle) {
-      let info = $(reqEle).find(".audit-requirement-info").text().filter();
-      let detail = $(reqEle).find(".audit-requirement-details").text().filter();
-      let requirement = {
-        info: info,
-        detail: detail
+  const response = [];
+  $('.audit-section, .audit-large-section').each((i, ele) => {
+    const heading = strFilter($(ele).find('.audit-section-heading, .audit-large-section-heading').text());
+    const requirements = [];
+    $(ele).find('.audit-requirement').each((ii, reqEle) => {
+      const info = strFilter($(reqEle).find('.audit-requirement-info').text());
+      const detail = strFilter($(reqEle).find('.audit-requirement-details').text());
+      const requirement = {
+        info,
+        detail,
       };
       requirements.push(requirement);
     });
-    let section = {
-      heading: heading,
-      requirements: requirements
+    const section = {
+      heading,
+      requirements,
     };
     response.push(section);
   });
   return response;
 }
 
-String.prototype.filter = function () {
-  let reg1 = /\ +/g;
-  let str1 = this.replace(reg1, ' ');
-  let reg2 = /\t+/g;
-  let str2 = str1.replace(reg2, "");
-  let reg3 = /\n(\s)*\n/g;
-  return str2.replace(reg3, "\n").trim();
-};
-
-exports.main = async (event, context) => {
-  let { code } = event;
-  let r = await getReq(code);
-  let res = formatReq(r);
+exports.main = async (event) => {
+  const { code } = event;
+  const r = await getReq(code);
+  const res = formatReq(r);
   return res;
-}
+};

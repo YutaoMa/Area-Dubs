@@ -10,11 +10,11 @@
       <view class='weui-loadmore__tips'>正在加载</view>
     </view>
 
-    <view class='weui-loadmore weui-loadmore_line' wx:if='{{degrees == null}}'>
+    <view class='weui-loadmore weui-loadmore_line' wx:elif='{{degrees == null}}'>
       <text class='weui-loadmore__tips'>暂无数据</text>
     </view>
 
-    <view class='weui-panel weui-panel_access'>
+    <view wx:else class='weui-panel weui-panel_access'>
       <view class='weui-panel__hd'>Degree Options</view>
       <view class='weui-panel__bd'>
         <view class='weui-media-box weui-media-box_text' wx:for='{{degrees}}' wx:key='code' bindtap='getDegreeReq' data-code='{{item.auditCode}}' data-title='{{item.name}}'>

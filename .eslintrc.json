@@ -1,0 +1,9 @@
+{
+    "extends": "airbnb-base",
+    "globals": {
+        "App": true,
+        "Page": true,
+        "wx": true,
+        "getApp": true
+    }
+}

@@ -1,21 +1,21 @@
-let request = require('request');
+const request = require('request');
 
 function searchCourse(code) {
-  return new Promise(function(resolve, reject) {
-    let url = 'https://myplan.uw.edu/course/api/courses/';
-    let data = {
+  return new Promise((resolve, reject) => {
+    const url = 'https://myplan.uw.edu/course/api/courses/';
+    const data = {
       campus: 'seattle',
       consumerLevel: 'UNDERGRADUATE',
       queryString: code,
-      sectionSearch: false
+      sectionSearch: false,
     };
     request({
       url,
       method: 'POST',
       json: true,
-      body: data
-    }, function(err, res, body) {
-      if(err) {
+      body: data,
+    }, (err, res, body) => {
+      if (err) {
         reject(err);
       } else {
         resolve(body);
@@ -25,18 +25,18 @@ function searchCourse(code) {
 }
 
 function formatCourse(r) {
-  let results = [];
-  for(let i = 0; i < r.length && i < 20; i++) {
+  const results = [];
+  for (let i = 0; i < r.length && i < 20; i += 1) {
     results.push({
-      code: r[i].code
+      code: r[i].code,
     });
   }
   return results;
 }
 
-exports.main = async (event, context) => {
-  let { code } = event;
-  let r = await searchCourse(code);
-  let res = formatCourse(r);
+exports.main = async (event) => {
+  const { code } = event;
+  const r = await searchCourse(code);
+  const res = formatCourse(r);
   return res;
-}
+};

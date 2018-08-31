@@ -1,10 +1,10 @@
-let request = require('request');
+const request = require('request');
 
 function getAlert() {
-  return new Promise(function(resolve, reject) {
-    let url = 'https://public-api.wordpress.com/rest/v1/sites/uwemergency.wordpress.com/posts';
-    request(url, function(err, res, body) {
-      if(err) {
+  return new Promise((resolve, reject) => {
+    const url = 'https://public-api.wordpress.com/rest/v1/sites/uwemergency.wordpress.com/posts';
+    request(url, (err, res, body) => {
+      if (err) {
         reject(err);
       } else {
         resolve(body);
@@ -13,27 +13,27 @@ function getAlert() {
   });
 }
 
+function formatDate(date) {
+  const d = new Date(date);
+  return d.toLocaleDateString('en-US');
+}
+
 function formatAlert(r) {
-  let posts = JSON.parse(r).posts;
-  let result = [];
-  for (let post of posts) {
+  const { posts } = JSON.parse(r);
+  const result = [];
+  posts.forEach((post) => {
     result.push({
       title: post.title,
       dateCreated: formatDate(post.date),
       dateModified: formatDate(post.modified),
-      content: post.content
+      content: post.content,
     });
-  }
+  });
   return result;
 }
 
-function formatDate(date) {
-  let d = new Date(date);
-  return d.toLocaleDateString('en-US');
-}
-
-exports.main = async (event, context) => {
-  let r = await getAlert();
-  let res = formatAlert(r);
+exports.main = async () => {
+  const r = await getAlert();
+  const res = formatAlert(r);
   return res;
-}
+};
