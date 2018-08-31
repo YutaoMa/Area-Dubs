@@ -8,6 +8,8 @@ App({
       wx.cloud.init()
     }
 
-    this.globalData = {}
+    this.globalData = {
+      canvasKey: ''
+    }
   }
 })

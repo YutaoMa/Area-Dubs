@@ -1,0 +1,41 @@
+<view class='page'>
+  <view class='page__hd weui-flex'>
+    <view class='weui-flex__item'>
+      <view class='page__title'>UW Canvas</view>
+      <view class='page__desc'>Learning Management System</view>
+    </view>
+    <view class='weui-flex__item' style='text-align: center;'>
+      <image src='../../images/canvas.png' />
+    </view>
+  </view>
+
+  <view class='page__bd'>
+    <view class='weui-btn-area' wx:if='{{canvasKey == ""}}'>
+      <button type='default' bindtap='refresh'>刷新认证</button>
+    </view>
+    
+
+    <view class='weui-panel weui-panel_access' wx:else>
+      <view class='weui-panel__hd'>功能列表</view>
+      <view class='weui-panel__bd'>
+        <navigator url='../canvasCourse/canvasCourse' class='weui-media-box weui-media-box_appmsg' hover-class='weui-cell_active'>
+          <view class='weui-media-box__hd weui-media-box__hd_in-appmsg'>
+            <image class='weui-media-box__thumb' src='../../images/course.png' />
+          </view>
+          <view class='weui-media-box__bd weui-media-box__bd_in-appmsg'>
+            <view class='weui-media-box__title'>课程</view>
+            <view class='weui-media-box__desc'>显示 Canvas 的注册课程</view>
+            <view class='weui-badge'>NEW</view>
+          </view>
+        </navigator>
+
+      </view>
+    </view>
+  </view>
+
+  <view class='page__ft'>
+    <view class='weui-footer weui-footer_fixed-bottom'>
+      <text class='weui-footer__text'>Copyright © 2018 YtMa</text>
+    </view>
+  </view>
+</view>

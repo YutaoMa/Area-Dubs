@@ -15,6 +15,18 @@
       <view class='weui-panel__bd'>
         <view class='weui-media-box weui-media-box_small-appmsg'>
           <view class='weui-cells weui-cells_in-small-appmsg'>
+            <view wx:if='{{logged && canvasKey == ""}}' class='weui-cell weui-cell_access' hover-class='weui-cell_active' bindtap='canvasAuth'>
+              <view class='weui-cell__hd'>
+                <image src='../../images/canvas.png' />
+              </view>
+              <view class='weui-cell__bd weui-cell_primary'>Canvas 认证</view>
+            </view>
+            <view wx:elif='{{logged}}' class='weui-cell weui-cell_access'>
+              <view class='weui-cell__hd'>
+                <image src='../../images/canvas.png' />
+              </view>
+              <view class='weui-cell__bd weui-cell_primary'>Canvas 已认证</view>
+            </view>
             <view wx:if='{{logged}}' class='weui-cell weui-cell_access' hover-class='weui-cell_active' bindtap='logout'>
               <view class='weui-cell__bd weui-cell_primary' style='text-align: center;'>退出登录</view>
             </view>

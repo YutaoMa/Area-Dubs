@@ -172,7 +172,8 @@ Page({
 
   setFrom: function(e) {
     wx.showLoading({
-      title: '正在加载'
+      title: '正在加载',
+      mask: true
     });
     let id = e.currentTarget.dataset.id;
     let that = this;
@@ -211,7 +212,8 @@ Page({
 
   setTo: function (e) {
     wx.showLoading({
-      title: '正在加载'
+      title: '正在加载',
+      mask: true
     });
     let id = e.currentTarget.dataset.id;
     let that = this;
@@ -250,7 +252,8 @@ Page({
 
   searchRoute: function() {
     wx.showLoading({
-      title: '搜索路径中'
+      title: '搜索路径中',
+      mask: true
     });
     let that = this;
     wx.cloud.callFunction({

@@ -1,0 +1,10 @@
+.page__hd {
+  margin: 20px;
+  align-items: center;
+}
+
+.page__hd image {
+  width: 20vw;
+  height: 20vw;
+  vertical-align: middle;
+}

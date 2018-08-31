@@ -1,4 +1,7 @@
-// pages/about/about.js
+let app = getApp();
+const db = wx.cloud.database();
+const canvasDb = db.collection('canvas');
+
 Page({
 
   /**
@@ -6,13 +9,16 @@ Page({
    */
   data: {
     userInfo: {},
-    logged: false
+    logged: false,
+    canvasKey: '',
+    userId: ''
   },
 
   bindGetUserInfo: function() {
     if(this.data.logged) return;
     wx.showLoading({
-      title: '正在登录'
+      title: '正在登录',
+      mask: true
     });
     let that = this;
     wx.getUserInfo({
@@ -20,6 +26,17 @@ Page({
         that.setData({
           userInfo: res.userInfo,
           logged: true
+        });
+        wx.cloud.callFunction({
+          name: 'login',
+          data: {
+          },
+          success: function(res) {
+            that.setData({
+              userId: res.result.openid
+            });
+          },
+          fail: console.error
         });
         wx.hideLoading();
       }
@@ -34,6 +51,7 @@ Page({
       success: function() {
         that.setData({
           userInfo: {},
+          userId: '',
           logged: false
         });
       }
@@ -44,55 +62,43 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      canvasKey: app.globalData.canvasKey
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  canvasAuth: function() {
+    let that = this;
+    canvasDb.where({
+      userId: this.data.userId
+    }).get({
+      success: function(res) {
+        if(res.data.length > 0) {
+          that.setData({
+            canvasKey: res.data[0].key
+          });
+          app.globalData.canvasKey = that.data.canvasKey;
+          wx.showToast({
+            title: '重新认证成功',
+            icon: 'success',
+            duration: 3000
+          });
+        } else {
+          wx.showModal({
+            title: '该用户未上传认证',
+            content: '是否跳转到上传页面',
+            success: function(res) {
+              if(res.confirm) {
+                wx.navigateTo({
+                  url: '../canvasAuth/canvasAuth'
+                });
+              }
+            }
+          });
+        }
+      },
+      fail: console.error
+    });
   }
+
 })

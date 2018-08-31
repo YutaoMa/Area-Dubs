@@ -88,7 +88,8 @@ Page({
   getInstructor: function(e) {
     let name = e.currentTarget.dataset.name;
     wx.showLoading({
-      title: '搜索评价中'
+      title: '搜索评价中',
+      mask: true
     });
     let fullName = name.split(" ");
     let firstName = fullName[0];

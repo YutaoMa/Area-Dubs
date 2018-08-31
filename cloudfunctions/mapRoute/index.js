@@ -19,7 +19,7 @@ function getRoute(fromLat, fromLong, toLat, toLong) {
 function formatRoute(r) {
   r = JSON.parse(r);
   let res = r.resourceSets[0].resources[0];
-  let time = (res.travelDuration / 60) + ' Mins';
+  let time = (res.travelDuration / 60).toFixed(2) + ' Mins';
   let distance = (res.travelDistance) + ' KMs';
   let points = [];
   for (let index of res.routePath.generalizations[0].pathIndices) {

@@ -1,8 +1,9 @@
 let request = require('request');
 
-function getHours() {
+function getUser(key) {
   return new Promise(function(resolve, reject) {
-    let url = 'https://api3.libcal.com/api_hours_today.php?iid=395&format=json';
+    let url = 'https://canvas.uw.edu/api/v1/users/self';
+    url += '?access_token=' + key;
     request(url, function(err, res, body) {
       if(err) {
         reject(err);
@@ -13,12 +14,13 @@ function getHours() {
   });
 }
 
-function formatHours(r) {
+function formatUser(r) {
   return r;
 }
 
 exports.main = async (event, context) => {
-  let r = await getHours();
-  let res = formatHours(r);
+  let { key } = event;
+  let r = await getUser(key);
+  let res = formatUser(r);
   return res;
 }

@@ -18,6 +18,7 @@ Page({
     <ul>
       <li>可以通过建筑全程或简写搜索, 例如: ODE, Lander Hall</li>
       <li>部分关键词可以快速搜索到一类设施, 例如: Parking</li>
+      <li>点击地图上展示的搜索结果可以进入路线查询界面</li>
     </ul>
     `,
     placeholder: '搜索'
@@ -141,7 +142,8 @@ Page({
 
   getLocation: function(e) {
     wx.showLoading({
-      title: '正在加载'
+      title: '正在加载',
+      mask: true
     });
     let id = e.currentTarget.dataset.id;
     let that = this;
