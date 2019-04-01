@@ -1,9 +1,0 @@
-# IDE
-.vscode/
-
-# Node
-node_modules/
-cloudfunctions/*/node_modules/
-
-# Config
-miniprogram/config.js

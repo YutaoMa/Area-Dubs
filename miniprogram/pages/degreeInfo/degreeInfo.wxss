@@ -1,7 +1,0 @@
-.page__hd {
-  padding: 20px;
-}
-
-.weui-media-box__info__meta {
-  text-transform: capitalize;
-}
